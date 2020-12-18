@@ -15,8 +15,8 @@ print(maxNum)
 num = int(input('Enter num: '))
 maxNum = -1
 while num != 0:
-    CurNum = num % 10
+    curNum = num % 10
     num //= 10
-    if CurNum > maxNum:
-        maxNum = CurNum
+    if curNum > maxNum:
+        maxNum = curNum
 print(maxNum)
