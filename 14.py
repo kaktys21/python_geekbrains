@@ -14,7 +14,7 @@ print(maxNum)
 '''арифметика'''
 num = int(input('Enter num: '))
 maxNum = -1
-while num > 10:
+while num != 0:
     CurNum = num % 10
     num //= 10
     if CurNum > maxNum:
