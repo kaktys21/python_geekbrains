@@ -41,8 +41,8 @@ def PowerBuiltin(x, n):
  
 def PowerFor(x, n):
     res = 1
-    for i in range(n):
-        res *= x
+    for i in range(-n):
+        res *= 1 / x
     return res
 
 
