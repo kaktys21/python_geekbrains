@@ -79,12 +79,12 @@ def LineCapitalizer(line):
 ''' Вызов функций '''
 
 def Main():
-    #Div(int(input()), int(input()))
-    #UserInfo(name = 'Егор', fname = 'Епишев', byear = 1999, lcity = 'Москва', email = 'epishegor@yandex.ru', number = 88005553535)
-    #MaxSum(int(input()), int(input()), int(input())
-    #PowerRecurr(int(input()), int(input()))
-    #PowerBuiltin(int(input()), int(input()))
-    #PowerFor(int(input()), int(input()))
-    #LineSum()
-    #Capitalizer(input())
-    #LineCapitalizer(input())
+    Div(int(input()), int(input()))
+    UserInfo(name = 'Егор', fname = 'Епишев', byear = 1999, lcity = 'Москва', email = 'epishegor@yandex.ru', number = 88005553535)
+    MaxSum(int(input()), int(input()), int(input()))
+    PowerRecurr(int(input()), int(input()))
+    PowerBuiltin(int(input()), int(input()))
+    PowerFor(int(input()), int(input()))
+    LineSum()
+    Capitalizer(input())
+    LineCapitalizer(input())
