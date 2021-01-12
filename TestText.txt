@@ -1,0 +1,58 @@
+import requests
+import time
+from bs4 import BeautifulSoup
+import re
+
+link = input('Enter link: ')
+fileName = input('Enter file directory without \'.txt\': ')
+
+def SDNextPage(link, fileName):
+       
+       '''скачивает выдачу поиска по ссылке, каждую следующую страницу берет сам, на случай, если там по пути что-то может поменяться'''
+       
+       outFile = open(fileName + '.txt', 'w', encoding = 'utf-8')
+       page = 1
+       def GetHTML(link):
+              time.sleep(1) # В целом, это можно убрать, но иногда ругается
+              return requests.get(link).text
+       
+       def GetNextPage(link):
+              soup = BeautifulSoup(GetHTML(link), features="lxml")
+              nextPageText = soup.find('p', {'class':'pager'}).find_all('a')[-1:][0].text
+              if nextPageText == "следующая страница":
+                     nextPage = re.match(r'http:([a-z\.-\\]*)/search', link).group(0)[:-6] + soup.find('p', {'class':'pager'}).find_all('a')[-1:][0].get('href')
+                     return nextPage
+              else:
+                     return 'end'
+       
+       def TextTaker(link):
+              global page
+              print('Page loading - ', page)
+              soup = BeautifulSoup(GetHTML(link), features="lxml")
+              titles = soup.find_all('table')
+              for result in re.sub(r'\[омонимия (не)? снята\] ←…→', '\t', ''.join([re.sub(r'\n', '', stitle) for stitle in [re.sub(r'  ', ' ', title) for title in [titles[i].text for i in range(2,len(titles))]]])).split('\t'):
+                     outFile.write(result+'\n')
+              nextPage = GetNextPage(link)
+              if nextPage != 'end':
+                     page += 1
+                     TextTaker(nextPage)
+              else:
+                     print('Done')
+       
+       TextTaker(link)
+       outFile.close()
+
+def SDCountPager(link, fileName):
+       a = 0
+       f = open(fileName + '.txt','w', encoding = 'utf-8')
+       if not link.endswith('&p=')
+       for n in range(1000):
+              r = requests.get(link+str(n))
+              ss = BeautifulSoup(r.text, features = "lxml").find_all('table')[2:]
+              for x in range(len(ss)): 
+                     a+=1 
+                     print(a)
+                     f.write(re.sub('  ',' ',str(a)+')'+ss[x].get_text()))
+                     f.write('\n')
+                     f.write('\n')
+       f.close()       

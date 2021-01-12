@@ -1,0 +1,4 @@
+firm1 aaa 1000 5000
+firm2 ooo 5000 1000
+firm3 oao 10000 5000
+firm4 oo 12000 10000
