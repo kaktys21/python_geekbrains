@@ -67,18 +67,19 @@ class Date:
 '''2. Создайте собственный класс-исключение, обрабатывающий ситуацию деления на нуль. Проверьте его работу на данных, 
 вводимых пользователем. При вводе пользователем нуля в качестве делителя программа должна корректно обработать эту ситуацию и не завершиться с ошибкой.'''        
         
-class ZeroDivision:
+class ZeroDivision(Exception):
     
-    def __init__(self, divider, denominator):
-        self.divider = divider
-        self.denominator = denominator
+    def __init__(self, text):
+        self.text = text
 
-    @staticmethod
-    def divide_by_null(divider, denominator):
-        try:
-            return (divider / denominator)
-        except:
-            return (f"Zero division!")
+inp_data = input('a/b:\t').split('/')
+try:
+    if int(inp_data[1]) == 0:
+        raise ZeroDivision("Zero division!")
+except ZeroDivision as err:
+    print(err)
+
+
 
 '''3. Создайте собственный класс-исключение, который должен проверять содержимое списка на наличие только чисел. 
 Проверить работу исключения на реальном примере. Необходимо запрашивать у пользователя данные и заполнять список. 
@@ -89,23 +90,27 @@ class ZeroDivision:
 реализовать проверку типа элемента и вносить его в список, только если введено число. Класс-исключение должен не позволить пользователю ввести текст
 (не число) и отобразить соответствующее сообщение. При этом работа скрипта не должна завершаться.'''        
 
-class ListError:
+class ListError(Exception):
     
-    def __init__(self, *args):
-        self.corr_list = []
-    
-    def list_filler(self):
-        
-        while True:
-            try:
-                adder = int(input('Next number:\t'))
-                self.corr_list.append(adder)
-            except:
-                print('Only numbers!')
-                nexter = input('More?\nY\\N\t').lower()
-                
-                if nexter == 'n':
-                    return self.corr_list
+    def __init__(self, text):
+        self.text = text
+
+corr_list = []
+while True:
+    nexter = 0
+    try:
+        adder = input('Next number:\t')
+        try:
+            adder = int(adder)
+        except:
+            raise ListError('Only numbers')
+        corr_list.append(adder)
+    except ListError as err:
+        print(err)
+        nexter = input('More?\nY\\N\t').lower()
+    if nexter == 'n':
+        print(corr_list)
+        break
 
 '''4. Начните работу над проектом «Склад оргтехники». Создайте класс, описывающий склад. 
 А также класс «Оргтехника», который будет базовым для классов-наследников. Эти классы — конкретные типы оргтехники (принтер, сканер, ксерокс). 
